@@ -3,7 +3,7 @@
 # Copyright (C) 2019 Intel Corporation.  All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-WAMR_DIR=${PWD}/../../..
+WAMR_DIR=${PWD}/../../../rumtime/wasm-micro-runtime
 
 if [ -z $KW_BUILD ] || [ -z $KW_OUT_FILE ];then
     echo "Local Build Env"

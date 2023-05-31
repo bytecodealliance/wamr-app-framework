@@ -13,7 +13,7 @@ set (CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
 
 ################  wamr runtime settings  ################
 
-set (WAMR_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../..)
+set (WAMR_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../runtime/wasm-micro-runtime)
 
 ## use library and headers in the SDK
 link_directories(${WAMR_ROOT_DIR}/wamr-sdk/out/littlevgl/runtime-sdk/lib)

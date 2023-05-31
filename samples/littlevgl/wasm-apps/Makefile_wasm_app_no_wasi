@@ -3,8 +3,8 @@
 
 CC = /opt/wasi-sdk/bin/clang
 LVGL_DIR = ${shell pwd}
-WAMR_DIR = ${LVGL_DIR}/../../..
-SDK_DIR = $(LVGL_DIR)/../../../wamr-sdk/out/littlevgl/app-sdk
+WAMR_DIR = ${LVGL_DIR}/../../../runtime/wasm-micro-runtime
+SDK_DIR = ${WAMR_DIR}/wamr-sdk/out/littlevgl/app-sdk
 APP_FRAMEWORK_DIR = $(SDK_DIR)/wamr-app-framework
 LVGL_REPO_PATH=../build/lvgl
 

@@ -6,7 +6,7 @@
 #!/bin/bash
 
 PROJECT_DIR=$PWD
-WAMR_DIR=${PWD}/../..
+WAMR_DIR=${PWD}/../../runtime/wasm-micro-runtime
 OUT_DIR=${PWD}/out
 BUILD_DIR=${PWD}/build
 LV_CFG_PATH=${PROJECT_DIR}/lv_config
@@ -79,7 +79,7 @@ echo "#####################build host-tool"
 cd $BUILD_DIR
 mkdir -p host-tool
 cd host-tool
-$cmakewrap ${WAMR_DIR}/test-tools/host-tool
+$cmakewrap ${PROJECT_DIR}/../../test-tools/host-tool
 $makewrap
 if [ $? != 0 ];then
         echo "BUILD_FAIL host tool exit as $?\n"
