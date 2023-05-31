@@ -6,12 +6,13 @@
 #!/bin/bash
 
 CURR_DIR=$PWD
-WAMR_DIR=${PWD}/../..
+WAMR_APP_FRAMEWORK=${CURR_DIR}/../..
+WAMR_DIR=${PWD}/../../runtime/wasm-micro-runtime
 OUT_DIR=${PWD}/out
 BUILD_DIR=${PWD}/build
 
-IWASM_ROOT=${PWD}/../../core/iwasm
-APP_FRAMEWORK_DIR=${PWD}/../../core/app-framework
+IWASM_ROOT=${WAMR_DIR}/core/iwasm
+APP_FRAMEWORK_DIR=${PWD}/../../app-framework
 NATIVE_LIBS=${APP_FRAMEWORK_DIR}/app-native-shared
 APP_LIB_SRC="${APP_FRAMEWORK_DIR}/base/app/*.c ${APP_FRAMEWORK_DIR}/sensor/app/*.c \
              ${APP_FRAMEWORK_DIR}/connection/app/*.c ${NATIVE_LIBS}/*.c"
@@ -100,6 +101,17 @@ PROFILE="simple-$PROFILE"
 
 
 echo "#####################build wamr sdk"
+# test if wamr/wamr-app-framework existed
+
+cd "${WAMR_DIR}"
+
+if [ ! -e "$WAMR_DIR/wamr-app-framework" ]; then
+    # create a soft link
+    ln -s "$WAMR_APP_FRAMEWORK" "./wamr-app-framework"
+    echo "create a fost link: ${WAMR_DIR}/wamr-app-framework --> ${WAMR_APP_FRAMEWORK}"
+fi
+
+
 cd ${WAMR_DIR}/wamr-sdk
 ./build_sdk.sh -n $PROFILE -x $SDK_CONFIG_FILE $ARG_TOOLCHAIN
 [ $? -eq 0 ] || exit $?
@@ -120,7 +132,7 @@ echo "#####################build simple project success"
 
 echo -e "\n\n"
 echo "#####################build host-tool"
-cd ${WAMR_DIR}/test-tools/host-tool
+cd ${WAMR_APP_FRAMEWORK}/test-tools/host-tool
 mkdir -p bin
 cd bin
 cmake .. $CM_TOOLCHAIN $CM_BUILD_TYPE

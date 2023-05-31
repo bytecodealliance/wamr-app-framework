@@ -12,7 +12,7 @@ import time
 import traceback
 import glob
 
-WAMRC_CMD = "../../wamr-compiler/build/wamrc"
+WAMRC_CMD = "../../runtime/wasm-micro-runtime/wamr-compiler/build/wamrc"
 
 def compile_wasm_files_to_aot(wasm_apps_dir):
     wasm_files = glob.glob(wasm_apps_dir + "/*.wasm")
