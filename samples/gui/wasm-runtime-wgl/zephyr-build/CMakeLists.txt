@@ -62,7 +62,10 @@ add_definitions(-DLV_MEM_CUSTOM=1)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src/platform/zephyr)
-include_directories(${WAMR_ROOT_DIR}/samples/gui/lv_config)
+
+#Origin: 
+#include_directories(${WAMR_ROOT_DIR}/samples/gui/lv_config)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../lv_config)
 
 set (LVGL_DRV_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/platform/zephyr/display_ili9340_adafruit_1480.c
