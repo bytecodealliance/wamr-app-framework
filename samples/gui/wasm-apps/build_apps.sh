@@ -18,7 +18,7 @@ if [ -z ${OUT_DIR} ]; then
 fi
 
 if [ -z ${WAMR_DIR} ]; then
-    WAMR_DIR=${APPS_ROOT}/../../..
+    WAMR_DIR=${APPS_ROOT}/../../../runtime/wasm-micro-runtime
 fi
 
 

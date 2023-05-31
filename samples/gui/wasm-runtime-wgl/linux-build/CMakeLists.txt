@@ -13,8 +13,8 @@ set (CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
 
 ################  wamr runtime settings  ################
 
-set (WAMR_ROOT_DIR  ${CMAKE_CURRENT_LIST_DIR}/../../../..)
-set (DEPS_DIR       ${WAMR_ROOT_DIR}/core/deps)
+set (WAMR_ROOT_DIR  ${CMAKE_CURRENT_LIST_DIR}/../../../../runtime/wasm-micro-runtime)
+set (DEPS_DIR       ${CMAKE_CURRENT_LIST_DIR}/../../../../deps)
 
 
 add_definitions(-DLV_CONF_INCLUDE_SIMPLE)
@@ -30,7 +30,7 @@ include_directories(
 
 ################  application related  ################
 
-set (LV_DRIVERS_DIR ${WAMR_ROOT_DIR}/core/deps/lv_drivers)
+set (LV_DRIVERS_DIR ${DEPS_DIR}/lv_drivers)
 file (GLOB_RECURSE LV_DRIVERS_SOURCES "${LV_DRIVERS_DIR}/*.c")
 
 set (PROJECT_SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/../src/platform/${WAMR_BUILD_PLATFORM})

@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 
 project(wgl)
 
-set (WAMR_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../../)
+set (WAMR_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../../runtime/wasm-micro-runtime)
 
 include_directories(
     ${WAMR_ROOT_DIR}/wamr-sdk/out/gui/app-sdk/wamr-app-framework/include
-    ${WAMR_ROOT_DIR}/core/deps
+    ${CMAKE_CURRENT_LIST_DIR}/../../../../deps
 )
 
 set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS},-L${WAMR_ROOT_DIR}/wamr-sdk/out/gui/app-sdk/wamr-app-framework/lib")
