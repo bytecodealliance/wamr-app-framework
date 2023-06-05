@@ -19,10 +19,10 @@ add_definitions(-DWA_MALLOC=malloc)
 add_definitions(-DWA_FREE=free)
 
 set (REPO_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../..)
-set (IWASM_DIR  ${REPO_ROOT_DIR}/core/iwasm)
-set (APP_MGR_DIR ${REPO_ROOT_DIR}/core/app-mgr)
-set (SHARED_DIR ${REPO_ROOT_DIR}/core/shared)
-set (APP_FRAMEWORK_DIR ${REPO_ROOT_DIR}/core/app-framework)
+set (IWASM_DIR  ${REPO_ROOT_DIR}/runtime/wasm-micro-runtime/core/iwasm)
+set (APP_MGR_DIR ${REPO_ROOT_DIR}/app-mgr)
+set (SHARED_DIR ${REPO_ROOT_DIR}/runtime/wasm-micro-runtime/core/shared)
+set (APP_FRAMEWORK_DIR ${REPO_ROOT_DIR}/app-framework)
 #TODO: use soft-plc/tools/iec-runtime/external/cJSON instead
 set (CJSON_DIR ${CMAKE_CURRENT_LIST_DIR}/external/cJSON)
 
