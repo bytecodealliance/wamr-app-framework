@@ -6,6 +6,7 @@
 #!/bin/bash
 
 PROJECT_DIR=$PWD
+WAMR_APP_FRAMEWORK=${PWD}/../../
 WAMR_DIR=${PWD}/../../runtime/wasm-micro-runtime
 OUT_DIR=${PWD}/out
 BUILD_DIR=${PWD}/build
@@ -42,6 +43,18 @@ if [ ! -d "lvgl" ]; then
 fi
 
 echo "##################### 0. build wamr-sdk littlevgl start#####################"
+
+
+# prepare WAMR
+
+cd ${WAMR_APP_FRAMEWORK}/runtime
+./prepare_wamr.sh
+
+if [ $? -ne 0 ]; then
+  echo "prepare_wamr.sh failed with error code $?."
+  exit 1
+fi
+
 cd ${WAMR_DIR}/wamr-sdk
 ./build_sdk.sh -n littlevgl -x ${PROJECT_DIR}/wamr_config_littlevgl.cmake -e ${LV_CFG_PATH} -c
 [ $? -eq 0 ] || exit $?

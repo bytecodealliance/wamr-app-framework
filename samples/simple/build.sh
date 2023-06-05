@@ -101,16 +101,15 @@ PROFILE="simple-$PROFILE"
 
 
 echo "#####################build wamr sdk"
-# test if wamr/wamr-app-framework existed
 
-cd "${WAMR_DIR}"
+# prepare WAMR
+cd ${WAMR_APP_FRAMEWORK}/runtime
+./prepare_wamr.sh
 
-if [ ! -e "$WAMR_DIR/wamr-app-framework" ]; then
-    # create a soft link
-    ln -s "$WAMR_APP_FRAMEWORK" "./wamr-app-framework"
-    echo "create a fost link: ${WAMR_DIR}/wamr-app-framework --> ${WAMR_APP_FRAMEWORK}"
+if [ $? -ne 0 ]; then
+  echo "prepare_wamr.sh failed with error code $?."
+  exit 1
 fi
-
 
 cd ${WAMR_DIR}/wamr-sdk
 ./build_sdk.sh -n $PROFILE -x $SDK_CONFIG_FILE $ARG_TOOLCHAIN

@@ -10,6 +10,11 @@ if [[ ! -d "$file_path" && ! -h "$file_path" ]]; then
     echo "\nFinish Downloading WAMR."
 fi
 
+if [ $? -ne 0 ]; then
+  echo "clone wamr failed with error code $?."
+  exit 1
+fi
+
 # test if wamr/wamr-app-framework existed
 
 cd "${WAMR_DIR}"
