@@ -32,7 +32,7 @@ Please refer to [package.json](./package.json) for more commands.
 These applications require WAMR's application framework, you need to build WAMR first.
 
 ``` bash
-cd ${WAMR_ROOT}/samples/simple
+cd ${WAMR_APP_FRAMEWORK_ROOT}/samples/simple
 ./build.sh
 ```
 
@@ -51,7 +51,7 @@ You will get two executable files under `out` folder:
     ``` bash
     ./host_tool -i app_name -f your_compiled_wasm_file.wasm
     ```
-You can also use the WAMR's AoT compiler `wamrc` to compile the wasm bytecode into native code before you run them. Please refer to this [guide](../README.md#build-wamrc-aot-compiler) to build and install `WAMR AoT compiler`.
+You can also use the WAMR's AoT compiler `wamrc` to compile the wasm bytecode into native code before you run them. Please refer to this [guide](https://github.com/bytecodealliance/wasm-micro-runtime/README.md#build-wamrc-aot-compiler) to build and install `WAMR AoT compiler`.
 
 After installing `wamrc`, you can compile the wasm file using command:
 ``` bash
