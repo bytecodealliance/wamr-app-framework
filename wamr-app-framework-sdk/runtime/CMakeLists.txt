@@ -29,10 +29,25 @@ if (NOT DEFINED OUT_DIR)
 endif ()
 set (RUNTIME_SDK_DIR        "${OUT_DIR}/runtime-sdk")
 
-include(${CMAKE_CURRENT_LIST_DIR}/../../build-scripts/runtime_lib.cmake)
+if (NOT DEFINED APP_MGR_DIR)
+    set (APP_MGR_DIR ${CMAKE_CURRENT_LIST_DIR}/../../app-mgr)
+endif ()
+
+if (NOT DEFINED APP_FRAMEWORK_DIR)
+    set (APP_FRAMEWORK_DIR ${CMAKE_CURRENT_LIST_DIR}/../../app-framework)
+endif ()
+
+include(${CMAKE_CURRENT_LIST_DIR}/../../deps/wasm-micro-runtime/build-scripts/runtime_lib.cmake)
+
+if (WAMR_BUILD_APP_FRAMEWORK EQUAL 1)
+    include (${APP_FRAMEWORK_DIR}/app_framework.cmake)
+    include (${CMAKE_CURRENT_LIST_DIR}/../../deps/wasm-micro-runtime/core/shared/coap/lib_coap.cmake)
+    include (${APP_MGR_DIR}/app-manager/app_mgr.cmake)
+    include (${APP_MGR_DIR}/app-mgr-shared/app_mgr_shared.cmake)
+endif ()
 
 # build vmlib
-add_library(vmlib ${WAMR_RUNTIME_LIB_SOURCE})
+add_library(vmlib ${WAMR_RUNTIME_LIB_SOURCE} ${APP_MGR_SOURCE} ${WASM_APP_LIB_SOURCE_ALL} ${NATIVE_INTERFACE_SOURCE})
 
 # copy vmlib.a to ${SDK_ROOT}/out/runtime-sdk/lib
 add_custom_command(

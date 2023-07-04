@@ -4,7 +4,8 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 sdk_root=$(cd "$(dirname "$0")/" && pwd)
-wamr_root_dir=${sdk_root}/..
+wamr_app_framework_root_dir=${sdk_root}/..
+wamr_root_dir=${sdk_root}/../deps/wasm-micro-runtime
 out_dir=${sdk_root}/out
 profile_path=${out_dir}/profile.cmake
 wamr_config_cmake_file=""
@@ -80,7 +81,7 @@ fi
 
 
 echo "download dependent external repositories.."
-${wamr_root_dir}/core/deps/download.sh
+${wamr_app_framework_root_dir}/deps/download.sh
 [ $? -eq 0 ] || exit $?
 
 
@@ -179,7 +180,7 @@ if [[ -n "${app_wgl_selected}" ]] || [[ -n "${app_all_selected}" ]]; then
         fi
     fi
 
-    cd ${wamr_root_dir}/core/app-framework/wgl/app
+    cd ${wamr_app_framework_root}/app-framework/wgl/app
     ./prepare_headers.sh
 fi
 

@@ -120,7 +120,8 @@ function set_app_module () {
 
 
 sdk_root=$(cd "$(dirname "$0")/" && pwd)
-wamr_root=${sdk_root}/..
+wamr_root=${sdk_root}/../deps/wasm-micro-runtime
+wamr_app_framework_root=${sdk_root}/..
 
 if [ ! `command -v menuconfig` ]; then
     echo "Can't find kconfiglib python lib on this computer"
@@ -136,7 +137,7 @@ if [ -f ".wamr_modules" ]; then
 fi
 
 # get all modules under core/app-framework
-for module in `ls ${wamr_root}/core/app-framework -F | grep "/$" | grep -v "base" | grep -v "app-native-shared" | grep -v "template"`
+for module in `ls ${wamr_app_framework_root}/app-framework -F | grep "/$" | grep -v "base" | grep -v "app-native-shared" | grep -v "template"`
 do
     module=${module%*/}
     echo "config APP_BUILD_${module^^}"   >>  .wamr_modules

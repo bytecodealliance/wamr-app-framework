@@ -57,7 +57,7 @@ if (WAMR_BUILD_APP_FRAMEWORK EQUAL 1)
     set (APP_FRAMEWORK_INCLUDE_TYPE     "APP")
     set (WAMR_APP_OUT_DIR  "${APP_SDK_DIR}/wamr-app-framework")
 
-    include(${CMAKE_CURRENT_LIST_DIR}/../../core/app-framework/app_framework.cmake)
+    include(${CMAKE_CURRENT_LIST_DIR}/../../app-framework/app_framework.cmake)
 
     add_library(app_framework
         ${WASM_APP_SOURCE_ALL}
