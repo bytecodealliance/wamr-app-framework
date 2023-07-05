@@ -7,7 +7,7 @@
 
 CURR_DIR=$PWD
 WAMR_APP_FRAMEWORK=${CURR_DIR}/../..
-WAMR_DIR=${PWD}/../../runtime/wasm-micro-runtime
+WAMR_DIR=${PWD}/../../deps/wasm-micro-runtime
 OUT_DIR=${PWD}/out
 BUILD_DIR=${PWD}/build
 
@@ -102,16 +102,7 @@ PROFILE="simple-$PROFILE"
 
 echo "#####################build wamr sdk"
 
-# prepare WAMR
-cd ${WAMR_APP_FRAMEWORK}/runtime
-./prepare_wamr.sh
-
-if [ $? -ne 0 ]; then
-  echo "prepare_wamr.sh failed with error code $?."
-  exit 1
-fi
-
-cd ${WAMR_DIR}/wamr-sdk
+cd ${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk
 ./build_sdk.sh -n $PROFILE -x $SDK_CONFIG_FILE $ARG_TOOLCHAIN
 [ $? -eq 0 ] || exit $?
 
@@ -154,12 +145,12 @@ APP_SRC="$i"
 OUT_FILE=${i%.*}.wasm
 
 /opt/wasi-sdk/bin/clang                                              \
-        -I${WAMR_DIR}/wamr-sdk/out/$PROFILE/app-sdk/wamr-app-framework/include  \
-        -L${WAMR_DIR}/wamr-sdk/out/$PROFILE/app-sdk/wamr-app-framework/lib      \
+        -I${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk/out/$PROFILE/app-sdk/wamr-app-framework/include  \
+        -L${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk/out/$PROFILE/app-sdk/wamr-app-framework/lib      \
         -lapp_framework                                              \
         --target=wasm32 -O3 -z stack-size=4096 -Wl,--initial-memory=65536 \
-        --sysroot=${WAMR_DIR}/wamr-sdk/out/$PROFILE/app-sdk/libc-builtin-sysroot  \
-        -Wl,--allow-undefined-file=${WAMR_DIR}/wamr-sdk/out/$PROFILE/app-sdk/libc-builtin-sysroot/share/defined-symbols.txt \
+        --sysroot=${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk/out/$PROFILE/app-sdk/libc-builtin-sysroot  \
+        -Wl,--allow-undefined-file=${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk/out/$PROFILE/app-sdk/libc-builtin-sysroot/share/defined-symbols.txt \
         -Wl,--strip-all,--no-entry -nostdlib \
         -Wl,--export=on_init -Wl,--export=on_destroy \
         -Wl,--export=on_request -Wl,--export=on_response \

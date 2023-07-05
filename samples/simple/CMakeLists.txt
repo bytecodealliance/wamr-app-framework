@@ -17,12 +17,13 @@ if ("$ENV{COLLECT_CODE_COVERAGE}" STREQUAL "1" OR COLLECT_CODE_COVERAGE EQUAL 1)
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 endif ()
 
-set (WAMR_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../.. ../../runtime/wasm-micro-runtime)
+set (WAMR_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../.. ../../deps/wasm-micro-runtime)
+set (WAMR_APP_FRAMEWORK_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../.. ../..)
 
 ## use library and headers in the SDK
-link_directories(${WAMR_ROOT_DIR}/wamr-sdk/out/${WAMR_BUILD_SDK_PROFILE}/runtime-sdk/lib)
+link_directories(${WAMR_APP_FRAMEWORK_ROOT_DIR}/wamr-app-framework-sdk/out/${WAMR_BUILD_SDK_PROFILE}/runtime-sdk/lib)
 include_directories(
-    ${WAMR_ROOT_DIR}/wamr-sdk/out/${WAMR_BUILD_SDK_PROFILE}/runtime-sdk/include
+    ${WAMR_APP_FRAMEWORK_ROOT_DIR}/wamr-app-framework-sdk/out/${WAMR_BUILD_SDK_PROFILE}/runtime-sdk/include
     ${WAMR_ROOT_DIR}/core/shared/utils
     ${WAMR_ROOT_DIR}/core/shared/platform/linux
 )
