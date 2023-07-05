@@ -180,7 +180,7 @@ if [[ -n "${app_wgl_selected}" ]] || [[ -n "${app_all_selected}" ]]; then
         fi
     fi
 
-    cd ${wamr_app_framework_root}/app-framework/wgl/app
+    cd ${wamr_app_framework_root_dir}/app-framework/wgl/app
     ./prepare_headers.sh
 fi
 

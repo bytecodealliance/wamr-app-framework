@@ -7,7 +7,7 @@
 
 PROJECT_DIR=$PWD
 WAMR_APP_FRAMEWORK=${PWD}/../../
-WAMR_DIR=${PWD}/../../runtime/wasm-micro-runtime
+WAMR_DIR=${PWD}/../../deps/wasm-micro-runtime
 OUT_DIR=${PWD}/out
 BUILD_DIR=${PWD}/build
 WAMR_RUNTIME_CFG=${PROJECT_DIR}/wamr_config_gui.cmake
@@ -34,16 +34,8 @@ mkdir ${OUT_DIR}
 echo -e "\n\n"
 echo "##################### 1. build wamr-sdk gui start#####################"
 
-# prepare WAMR
-cd ${WAMR_APP_FRAMEWORK}/runtime 
-./prepare_wamr.sh
 
-if [ $? -ne 0 ]; then
-  echo "prepare_wamr.sh failed with error code $?."
-  exit 1
-fi
-
-cd ${WAMR_DIR}/wamr-sdk
+cd ${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk
 ./build_sdk.sh -n gui -x ${WAMR_RUNTIME_CFG} -e ${LV_CFG_PATH}
 [ $? -eq 0 ] || exit $?
 

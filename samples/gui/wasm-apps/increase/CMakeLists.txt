@@ -2,14 +2,15 @@ cmake_minimum_required(VERSION 2.8)
 
 project(wgl)
 
-set (WAMR_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../../runtime/wasm-micro-runtime)
+set (WAMR_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../../deps/wasm-micro-runtime)
+set (WAMR_APP_FRAMEWORK_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../..)
 
 include_directories(
-    ${WAMR_ROOT_DIR}/wamr-sdk/out/gui/app-sdk/wamr-app-framework/include
+    ${WAMR_APP_FRAMEWORK_ROOT_DIR}/wamr-app-framework-sdk/out/gui/app-sdk/wamr-app-framework/include
     ${CMAKE_CURRENT_LIST_DIR}/../../../../deps
 )
 
-set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS},-L${WAMR_ROOT_DIR}/wamr-sdk/out/gui/app-sdk/wamr-app-framework/lib")
+set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS},-L${WAMR_APP_FRAMEWORK_ROOT_DIR}/wamr-app-framework-sdk/out/gui/app-sdk/wamr-app-framework/lib")
 set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS},--export=on_init,--export=on_timer_callback,--export=on_widget_event,--export=__heap_base,--export=__data_end")
 set (CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} -O3 -Wno-unused-command-line-argument")
 

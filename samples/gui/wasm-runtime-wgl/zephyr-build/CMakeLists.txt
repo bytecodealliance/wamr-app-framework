@@ -52,6 +52,26 @@ if (NOT DEFINED WAMR_BUILD_APP_LIST)
   set (WAMR_BUILD_APP_LIST WAMR_APP_BUILD_ALL)
 endif ()
 
+if (NOT DEFINED APP_MGR_DIR)
+    set (APP_MGR_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../../app-mgr)
+endif ()
+if (NOT DEFINED APP_FRAMEWORK_DIR)
+    set (APP_FRAMEWORK_DIR ${WAMR_ROOT_DIR}/../../../../app-framework)
+endif ()
+
+###################  app framework relared setting  ############
+if (WAMR_BUILD_APP_FRAMEWORK EQUAL 1)
+    include (${APP_FRAMEWORK_DIR}/app_framework.cmake)
+    include (${WAMR_ROOT_DIR}/core/share/coap/lib_coap.cmake)
+    include (${APP_MGR_DIR}/app-manager/app_mgr.cmake)
+    include (${APP_MGR_DIR}/app-mgr-shared/app_mgr_shared.cmake)
+    set (APP_FRAMEWORK_SRCS
+         ${APP_MGR_SOURCE}
+         ${WASM_APP_LIB_SOURCE_ALL}
+         ${NATIVE_INTERFACE_SOURCE}
+         )
+endif ()
+
 ################  wamr runtime settings  ################
 set (WAMR_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/wamr)
 include (${WAMR_ROOT_DIR}/build-scripts/runtime_lib.cmake)
@@ -75,6 +95,7 @@ set (LVGL_DRV_SRCS
 
 target_sources(app PRIVATE
                ${WAMR_RUNTIME_LIB_SOURCE}
+               ${APP_FRAMEWORK_SRCS}
                ${LVGL_DRV_SRCS}
                ${CMAKE_CURRENT_SOURCE_DIR}/../src/platform/zephyr/main.c
                ${CMAKE_CURRENT_SOURCE_DIR}/../src/platform/zephyr/iwasm_main.c

@@ -3,9 +3,10 @@
 
 CC = /opt/wasi-sdk/bin/clang
 APP_DIR = ${shell pwd}
-IWASM_DIR = ../../../../core/iwasm
-APP_FRAMEWORK_DIR = ../../../../core/app-framework
-DEPS_DIR = ../../../../core/deps
+WAMR_DIR = ../../../../deps/wasm-micro-runtime
+IWASM_DIR = ${WAMR_DIR}/core/iwasm
+APP_FRAMEWORK_DIR = ../../../../app-framework
+DEPS_DIR = ../../../../deps
 
 CFLAGS += -O3 \
 	  -Wno-int-conversion \

@@ -17,8 +17,8 @@ if [ -z ${OUT_DIR} ]; then
 
 fi
 
-if [ -z ${WAMR_DIR} ]; then
-    WAMR_DIR=${APPS_ROOT}/../../../runtime/wasm-micro-runtime
+if [ -z ${WAMR_APP_FRAMEWORK_DIR} ]; then
+    WAMR_APP_FRAMEWORK_DIR=${APPS_ROOT}/../../..
 fi
 
 
@@ -26,7 +26,7 @@ cd ${APPS_ROOT}/increase
 
 rm -rf build
 mkdir build && cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=${WAMR_DIR}/wamr-sdk/out/gui/app-sdk/wamr_toolchain.cmake \
+cmake .. -DCMAKE_TOOLCHAIN_FILE=${WAMR_APP_FRAMEWORK_DIR}/wamr-app-framework-sdk/out/gui/app-sdk/wamr_toolchain.cmake \
          -DWASI_SDK_DIR=/opt/wasi-sdk
 make
 [ $? -eq 0 ] || exit $?
