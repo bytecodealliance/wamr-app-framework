@@ -1,3 +1,8 @@
+/*
+ * Copyright (C) 2019 Intel Corporation.  All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ */
+
 #include "lib_export.h"
 
 #ifdef APP_FRAMEWORK_SENSOR
