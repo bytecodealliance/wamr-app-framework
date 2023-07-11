@@ -102,7 +102,7 @@ PROFILE="simple-$PROFILE"
 
 echo "#####################build wamr sdk"
 
-cd ${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk
+cd ${WAMR_APP_FRAMEWORK}/wamr-sdk
 ./build_sdk.sh -n $PROFILE -x $SDK_CONFIG_FILE $ARG_TOOLCHAIN
 [ $? -eq 0 ] || exit $?
 
@@ -145,12 +145,12 @@ APP_SRC="$i"
 OUT_FILE=${i%.*}.wasm
 
 /opt/wasi-sdk/bin/clang                                              \
-        -I${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk/out/$PROFILE/app-sdk/wamr-app-framework/include  \
-        -L${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk/out/$PROFILE/app-sdk/wamr-app-framework/lib      \
+        -I${WAMR_APP_FRAMEWORK}/wamr-sdk/out/$PROFILE/app-sdk/wamr-app-framework/include  \
+        -L${WAMR_APP_FRAMEWORK}/wamr-sdk/out/$PROFILE/app-sdk/wamr-app-framework/lib      \
         -lapp_framework                                              \
         --target=wasm32 -O3 -z stack-size=4096 -Wl,--initial-memory=65536 \
-        --sysroot=${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk/out/$PROFILE/app-sdk/libc-builtin-sysroot  \
-        -Wl,--allow-undefined-file=${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk/out/$PROFILE/app-sdk/libc-builtin-sysroot/share/defined-symbols.txt \
+        --sysroot=${WAMR_APP_FRAMEWORK}/wamr-sdk/out/$PROFILE/app-sdk/libc-builtin-sysroot  \
+        -Wl,--allow-undefined-file=${WAMR_APP_FRAMEWORK}/wamr-sdk/out/$PROFILE/app-sdk/libc-builtin-sysroot/share/defined-symbols.txt \
         -Wl,--strip-all,--no-entry -nostdlib \
         -Wl,--export=on_init -Wl,--export=on_destroy \
         -Wl,--export=on_request -Wl,--export=on_response \

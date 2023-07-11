@@ -17,10 +17,10 @@ set (WAMR_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../deps/wasm-micro-runtime)
 set (WAMR_APP_FRAMEWORK_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../..)
 
 ## use library and headers in the SDK
-link_directories(${WAMR_APP_FRAMEWORK_ROOT_DIR}/wamr-app-framework-sdk/out/littlevgl/runtime-sdk/lib)
+link_directories(${WAMR_APP_FRAMEWORK_ROOT_DIR}/wamr-sdk/out/littlevgl/runtime-sdk/lib)
 include_directories(
-    ${WAMR_APP_FRAMEWORK_ROOT_DIR}/wamr-app-framework-sdk/out/littlevgl/runtime-sdk/include
-    ${WAMR_APP_FRAMEWORK_ROOT_DIR}/wamr-app-framework-sdk/out/littlevgl/runtime-sdk/include/bi-inc/deps
+    ${WAMR_APP_FRAMEWORK_ROOT_DIR}/wamr-sdk/out/littlevgl/runtime-sdk/include
+    ${WAMR_APP_FRAMEWORK_ROOT_DIR}/wamr-sdk/out/littlevgl/runtime-sdk/include/bi-inc/deps
     ${WAMR_ROOT_DIR}/core/shared/utils
     ${WAMR_ROOT_DIR}/core/shared/platform/${WAMR_BUILD_PLATFORM}
 )

@@ -4,7 +4,7 @@
 CC = /opt/wasi-sdk/bin/clang
 LVGL_DIR = ${shell pwd}
 WAMR_DIR = ${LVGL_DIR}/../../../deps/wasm-micro-runtime
-SDK_DIR = ${LVGL_DIR}/../../../wamr-app-framework-sdk/out/littlevgl/app-sdk
+SDK_DIR = ${LVGL_DIR}/../../../wamr-sdk/out/littlevgl/app-sdk
 APP_FRAMEWORK_DIR = $(SDK_DIR)/wamr-app-framework
 LVGL_REPO_PATH=../build/lvgl
 
@@ -49,7 +49,7 @@ SRCS += $(LVGL_DIR)/src/main.c
 all:
 	@$(CC) $(CFLAGS) $(SRCS) \
     --target=wasm32 -Wl,--allow-undefined \
-    --sysroot=${LVGL_DIR}/../../../wamr-app-framework-sdk/app/libc-builtin-sysroot \
+    --sysroot=${LVGL_DIR}/../../../wamr-sdk/app/libc-builtin-sysroot \
     -O3 -z stack-size=2048 -Wl,--initial-memory=65536 \
     -DLV_CONF_INCLUDE_SIMPLE                        \
     -L$(APP_FRAMEWORK_DIR)/lib -lapp_framework      \

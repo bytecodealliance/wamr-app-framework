@@ -35,7 +35,7 @@ echo -e "\n\n"
 echo "##################### 1. build wamr-sdk gui start#####################"
 
 
-cd ${WAMR_APP_FRAMEWORK}/wamr-app-framework-sdk
+cd ${WAMR_APP_FRAMEWORK}/wamr-sdk
 ./build_sdk.sh -n gui -x ${WAMR_RUNTIME_CFG} -e ${LV_CFG_PATH}
 [ $? -eq 0 ] || exit $?
 

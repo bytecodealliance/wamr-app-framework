@@ -21,10 +21,10 @@ set (WAMR_APP_FRAMEWORK_DIR       ${CMAKE_CURRENT_LIST_DIR}/../../../..)
 add_definitions(-DLV_CONF_INCLUDE_SIMPLE)
 
 ## use library and headers in the SDK
-link_directories(${WAMR_APP_FRAMEWORK_DIR}/wamr-app-framework-sdk/out/gui/runtime-sdk/lib)
+link_directories(${WAMR_APP_FRAMEWORK_DIR}/wamr-sdk/out/gui/runtime-sdk/lib)
 include_directories(
-    ${WAMR_APP_FRAMEWORK_DIR}/wamr-app-framework-sdk/out/gui/runtime-sdk/include
-    ${WAMR_APP_FRAMEWORK_DIR}/wamr-app-framework-sdk/out/gui/runtime-sdk/include/bi-inc/deps
+    ${WAMR_APP_FRAMEWORK_DIR}/wamr-sdk/out/gui/runtime-sdk/include
+    ${WAMR_APP_FRAMEWORK_DIR}/wamr-sdk/out/gui/runtime-sdk/include/bi-inc/deps
     ${WAMR_ROOT_DIR}/core/shared/utils
     ${WAMR_ROOT_DIR}/core/shared/platform/${WAMR_BUILD_PLATFORM}
 )
