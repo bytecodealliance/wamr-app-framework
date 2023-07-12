@@ -79,12 +79,12 @@ else
     echo "Found WASI_SDK HOME ${wasi_sdk_home}"
 fi
 
-
-echo "download dependent external repositories.."
-${wamr_app_framework_root_dir}/deps/download.sh
+echo "Init submodules..."
+cd ${wamr_app_framework_root_dir}
+git submodule init
 [ $? -eq 0 ] || exit $?
-
-
+cd ${sdk_root}
+${wamr_app_framework_root_dir}/app-framework/wgl/app/prepare_headers.sh
 
 if [ -z "$PROFILE" ]; then
     PROFILE="default"
