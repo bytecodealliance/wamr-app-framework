@@ -1,0 +1,4 @@
+[submodule "deps/wasm-micro-runtime"]
+	path = deps/wasm-micro-runtime
+	url = https://github.com/bytecodealliance/wasm-micro-runtime.git
+	branch = dev/separate_app_framework
