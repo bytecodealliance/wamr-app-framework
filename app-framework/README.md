@@ -26,9 +26,9 @@ Every other subfolder is framework component. Each component contains two librar
 
 The app framework is built on top of two fundamental operations:
 
-- [Native calls into WASM function](../../doc/embed_wamr.md)
+- [Native calls into WASM function](../deps/wasm-micro-runtime/doc/embed_wamr.md)
 
-- [WASM app calls into native API](../../doc/export_native_api.md)
+- [WASM app calls into native API](../deps/wasm-micro-runtime/doc/export_native_api.md)
 
 Asynchronized programming model is supported for WASM applications
 
@@ -36,7 +36,7 @@ Asynchronized programming model is supported for WASM applications
 
 - Queue and messaging
 
-<img src="../../doc/pics/app_framework.PNG" style="zoom:67%;" />
+<img src="../doc/pics/app_framework.PNG" style="zoom:67%;" />
 
 
 
@@ -44,7 +44,7 @@ Asynchronized programming model is supported for WASM applications
 
 A component can be compilation configurable to the runtime. The wamr SDK tool "build_sdk.sh" supports menu config to select app components for building a customized runtime.
 
-A number of CMAKE variables are defined to control build of framework and components. You can create a cmake file for defining these variables and include it in the CMakeList.txt for your software, or pass it in "-x" argument when run the [build_sdk.sh](../../wamr-sdk/build_sdk.sh) for building the runtime SDK.
+A number of CMAKE variables are defined to control build of framework and components. You can create a cmake file for defining these variables and include it in the CMakeList.txt for your software, or pass it in "-x" argument when run the [build_sdk.sh](../wamr-sdk/build_sdk.sh) for building the runtime SDK.
 
 ```cmake
 set (WAMR_BUILD_APP_FRAMEWORK 1)
@@ -116,5 +116,5 @@ Generally you should follow following steps to create a new component:
 
 
 ## Sensor component working flow
-![](../../doc/pics/sensor_callflow.PNG)
+![](../doc/pics/sensor_callflow.PNG)
 

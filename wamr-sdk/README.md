@@ -91,7 +91,7 @@ The folder “**app-sdk**” under the profile output directory contains all the
 
 
 
-Refer to [build WASM applications](../doc/build_wasm_app.md) for the details.
+Refer to [build WASM applications](../deps/wasm-micro-runtime/doc/build_wasm_app.md) for the details.
 
 
 
@@ -128,6 +128,6 @@ add_library (vmlib ${WAMR_RUNTIME_LIB_SOURCE})
 target_link_libraries (your_target vmlib -lm -ldl -lpthread)
 ```
 
-You can refer to to product-mini building for Linux: [`product-mini/platforms/linux/CMakeLists.txt`](../product-mini/platforms/linux/CMakeLists.txt).
+You can refer to to product-mini building for Linux: [`product-mini/platforms/linux/CMakeLists.txt`](../deps/wasm-micro-runtime/product-mini/platforms/linux/CMakeLists.txt).
 
 > 
