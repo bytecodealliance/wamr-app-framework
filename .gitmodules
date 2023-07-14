@@ -1,0 +1,12 @@
+[submodule "deps/wasm-micro-runtime"]
+	path = deps/wasm-micro-runtime
+	url = https://github.com/bytecodealliance/wasm-micro-runtime.git
+	branch = dev/separate_app_framework
+[submodule "deps/lvgl"]
+	path = deps/lvgl
+	url = https://github.com/lvgl/lvgl.git
+	branch = release/v6
+[submodule "deps/lv_drivers"]
+	path = deps/lv_drivers
+	url = https://github.com/lvgl/lv_drivers.git
+	branch = release/v6
