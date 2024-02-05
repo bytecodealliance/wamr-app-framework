@@ -1,22 +1,3 @@
-**Notice**: This repos is not yet available for use.
-
-**Notice**: This repos is not yet available for use.
-
-**Notice**: This repos is not yet available for use.
-
-# Todo
-```
-[x] app-framework
-[x] app-mgr
-[x] deps
-[x] runtime/wasm-micro-runtime
-[x] samples
-[x] host-tool
-[x] IoT-APP-Store-Demo
-[x] wamr-sdk
-[] test-tools/component-test
-[] CI
-```
 # WebAssembly Micro Runtime Application Framework
 
 [BA]: https://bytecodealliance.org/
