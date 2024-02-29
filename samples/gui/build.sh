@@ -27,21 +27,21 @@ if [ ! -d $BUILD_DIR ]; then
     mkdir ${BUILD_DIR}
 fi
 
+echo "#####################clone dependent projects"
+cd ${WAMR_APP_FRAMEWORK}/deps
+./download.sh
+
 rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
 
-
 echo -e "\n\n"
 echo "##################### 1. build wamr-sdk gui start#####################"
-
 
 cd ${WAMR_APP_FRAMEWORK}/wamr-sdk
 ./build_sdk.sh -n gui -x ${WAMR_RUNTIME_CFG} -e ${LV_CFG_PATH}
 [ $? -eq 0 ] || exit $?
 
 echo "#####################build wamr-sdk success"
-
-
 
 echo "##################### 2. build wasm runtime start#####################"
 cd $BUILD_DIR
@@ -55,7 +55,6 @@ cp wasm_runtime_wgl ${OUT_DIR}/
 
 echo "##################### build littlevgl wasm runtime end#####################"
 echo -e "\n\n"
-
 
 echo "#####################build host-tool"
 cd $BUILD_DIR
@@ -75,4 +74,3 @@ echo "##################### 3. build wasm ui app start#####################"
 cd ${PROJECT_DIR}/wasm-apps
 export OUT_DIR=${OUT_DIR}
 ./build_apps.sh
-

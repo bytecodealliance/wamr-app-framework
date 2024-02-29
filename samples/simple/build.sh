@@ -82,30 +82,27 @@ if [  -f $TOOL_CHAIN_FILE ]; then
     echo "toolchain file: $TOOL_CHAIN_FILE"
 fi
 
-
 SDK_CONFIG_FILE=$CURR_DIR/profiles/$PROFILE/wamr_config_simple.cmake
 if [ ! -f $SDK_CONFIG_FILE ]; then
     echo "SDK config file [$SDK_CONFIG_FILE] doesn't exit. quit.."
     exit 1
 fi
 
-
+echo "#####################clone dependent projects"
+cd ${WAMR_APP_FRAMEWORK}/deps
+./download.sh
 
 rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
 mkdir ${OUT_DIR}/wasm-apps
 
-cd ${WAMR_DIR}/core/shared/mem-alloc
-
 PROFILE="simple-$PROFILE"
-
 
 echo "#####################build wamr sdk"
 
 cd ${WAMR_APP_FRAMEWORK}/wamr-sdk
 ./build_sdk.sh -n $PROFILE -x $SDK_CONFIG_FILE $ARG_TOOLCHAIN
 [ $? -eq 0 ] || exit $?
-
 
 echo "#####################build simple project"
 cd ${CURR_DIR}
