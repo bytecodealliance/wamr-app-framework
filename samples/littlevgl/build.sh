@@ -12,8 +12,6 @@ OUT_DIR=${PWD}/out
 BUILD_DIR=${PWD}/build
 LV_CFG_PATH=${PROJECT_DIR}/lv_config
 
-
-
 if [ -z $KW_BUILD ] || [ -z $KW_OUT_FILE ];then
     echo "Local Build Env"
     cmakewrap="cmake"
@@ -28,9 +26,12 @@ if [ ! -d $BUILD_DIR ]; then
     mkdir ${BUILD_DIR}
 fi
 
+echo "#####################clone dependent projects"
+cd ${WAMR_APP_FRAMEWORK_DIR}/deps
+./download.sh
+
 rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
-
 
 cd ${BUILD_DIR}
 if [ ! -d "lvgl" ]; then
@@ -43,7 +44,6 @@ if [ ! -d "lvgl" ]; then
 fi
 
 echo "##################### 0. build wamr-sdk littlevgl start#####################"
-
 
 cd ${WAMR_APP_FRAMEWORK_DIR}/wamr-sdk
 ./build_sdk.sh -n littlevgl -x ${PROJECT_DIR}/wamr_config_littlevgl.cmake -e ${LV_CFG_PATH} -c

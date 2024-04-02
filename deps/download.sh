@@ -16,6 +16,11 @@ if [ ! -d "lv_drivers" ]; then
         git clone https://github.com/lvgl/lv_drivers.git --branch v6.0.1
         [ $? -eq 0 ] || exit $?
 fi
+if [ ! -d "wasm-micro-runtime" ]; then
+        echo "git pull wasm-micro-runtime..."
+        git clone https://github.com/bytecodealliance/wasm-micro-runtime.git
+        [ $? -eq 0 ] || exit $?
+fi
 
 exit 0
 
