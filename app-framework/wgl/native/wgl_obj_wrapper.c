@@ -55,10 +55,10 @@ app_mgr_object_event_callback(module_data *m_data, bh_message_t msg)
         return;
 
     func_on_object_event =
-        wasm_runtime_lookup_function(inst, "_on_widget_event", "(i32i32)");
+        wasm_runtime_lookup_function(inst, "_on_widget_event");
     if (!func_on_object_event)
         func_on_object_event =
-            wasm_runtime_lookup_function(inst, "on_widget_event", "(i32i32)");
+            wasm_runtime_lookup_function(inst, "on_widget_event");
     if (!func_on_object_event) {
         printf("Cannot find function on_widget_event\n");
         return;
