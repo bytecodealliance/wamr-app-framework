@@ -34,16 +34,15 @@ app_mgr_sensor_event_callback(module_data *m_data, bh_message_t msg)
     if (payload == NULL)
         return;
 
-    func_onSensorEvent =
-        wasm_runtime_lookup_function(inst, "_on_sensor_event", "(i32i32i32)");
+    func_onSensorEvent = wasm_runtime_lookup_function(inst, "_on_sensor_event");
     if (!func_onSensorEvent)
-        func_onSensorEvent = wasm_runtime_lookup_function(
-            inst, "on_sensor_event", "(i32i32i32)");
+        func_onSensorEvent =
+            wasm_runtime_lookup_function(inst, "on_sensor_event");
     if (!func_onSensorEvent) {
         printf("Cannot find function on_sensor_event\n");
     }
     else {
-        int32 sensor_data_offset;
+        int64 sensor_data_offset;
         uint32 sensor_data_len;
 
         if (payload->data_fmt == FMT_ATTR_CONTAINER) {
@@ -55,8 +54,9 @@ app_mgr_sensor_event_callback(module_data *m_data, bh_message_t msg)
             return;
         }
 
-        sensor_data_offset =
-            wasm_runtime_module_dup_data(inst, payload->data, sensor_data_len);
+        sensor_data_offset = wasm_runtime_module_dup_data(
+            inst, payload->data, (uint64)sensor_data_len);
+        bh_assert(sensor_data_offset <= UINT32_MAX);
         if (sensor_data_offset == 0) {
             const char *exception = wasm_runtime_get_exception(inst);
             if (exception) {

@@ -508,16 +508,16 @@ app_mgr_connection_event_callback(module_data *m_data, bh_message_t msg)
     wasm_module_inst_t inst = wasm_app_data->wasm_module_inst;
     connection_event_t *conn_event =
         (connection_event_t *)bh_message_payload(msg);
-    int32 data_offset;
+    int64 data_offset;
 
     if (conn_event == NULL)
         return;
 
-    func_on_conn_data = wasm_runtime_lookup_function(
-        inst, "_on_connection_data", "(i32i32i32)");
+    func_on_conn_data =
+        wasm_runtime_lookup_function(inst, "_on_connection_data");
     if (!func_on_conn_data)
-        func_on_conn_data = wasm_runtime_lookup_function(
-            inst, "on_connection_data", "(i32i32i32)");
+        func_on_conn_data =
+            wasm_runtime_lookup_function(inst, "on_connection_data");
     if (!func_on_conn_data) {
         printf("Cannot find function on_connection_data\n");
         return;
@@ -539,7 +539,8 @@ app_mgr_connection_event_callback(module_data *m_data, bh_message_t msg)
     }
     else {
         data_offset = wasm_runtime_module_dup_data(inst, conn_event->data,
-                                                   conn_event->len);
+                                                   (uint64)conn_event->len);
+        bh_assert(data_offset <= UINT32_MAX);
         if (data_offset == 0) {
             const char *exception = wasm_runtime_get_exception(inst);
             if (exception) {

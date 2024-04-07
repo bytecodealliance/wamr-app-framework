@@ -189,13 +189,13 @@ exchange_uint32(uint8 *p_data)
 
 static wasm_function_inst_t
 app_manager_lookup_function(const wasm_module_inst_t module_inst,
-                            const char *name, const char *signature)
+                            const char *name)
 {
     wasm_function_inst_t func;
 
-    func = wasm_runtime_lookup_function(module_inst, name, signature);
+    func = wasm_runtime_lookup_function(module_inst, name);
     if (!func && name[0] == '_')
-        func = wasm_runtime_lookup_function(module_inst, name + 1, signature);
+        func = wasm_runtime_lookup_function(module_inst, name + 1);
     return func;
 }
 
@@ -221,14 +221,14 @@ app_instance_queue_callback(void *queue_msg, void *arg)
                 request_t *request = (request_t *)bh_message_payload(queue_msg);
                 int size;
                 char *buffer;
-                int32 buffer_offset;
+                int64 buffer_offset;
 
                 app_manager_printf("App %s got request, url %s, action %d\n",
                                    m_data->module_name, request->url,
                                    request->action);
 
-                func_onRequest = app_manager_lookup_function(
-                    inst, "_on_request", "(i32i32)");
+                func_onRequest =
+                    app_manager_lookup_function(inst, "_on_request");
                 if (!func_onRequest) {
                     app_manager_printf("Cannot find function onRequest\n");
                     break;
@@ -239,7 +239,8 @@ app_instance_queue_callback(void *queue_msg, void *arg)
                     break;
 
                 buffer_offset =
-                    wasm_runtime_module_dup_data(inst, buffer, size);
+                    wasm_runtime_module_dup_data(inst, buffer, (uint64)size);
+                bh_assert(buffer_offset <= UINT32_MAX);
                 if (buffer_offset == 0) {
                     const char *exception = wasm_runtime_get_exception(inst);
                     if (exception) {
@@ -278,13 +279,13 @@ app_instance_queue_callback(void *queue_msg, void *arg)
                     (response_t *)bh_message_payload(queue_msg);
                 int size;
                 char *buffer;
-                int32 buffer_offset;
+                int64 buffer_offset;
 
                 app_manager_printf("App %s got response_t,status %d\n",
                                    m_data->module_name, response->status);
 
-                func_onResponse = app_manager_lookup_function(
-                    inst, "_on_response", "(i32i32)");
+                func_onResponse =
+                    app_manager_lookup_function(inst, "_on_response");
                 if (!func_onResponse) {
                     app_manager_printf("Cannot find function on_response\n");
                     break;
@@ -295,7 +296,8 @@ app_instance_queue_callback(void *queue_msg, void *arg)
                     break;
 
                 buffer_offset =
-                    wasm_runtime_module_dup_data(inst, buffer, size);
+                    wasm_runtime_module_dup_data(inst, buffer, (uint64)size);
+                bh_assert(buffer_offset <= UINT32_MAX);
                 if (buffer_offset == 0) {
                     const char *exception = wasm_runtime_get_exception(inst);
                     if (exception) {
@@ -348,8 +350,8 @@ app_instance_queue_callback(void *queue_msg, void *arg)
                 unsigned int timer_id;
                 if (bh_message_payload(queue_msg)) {
                     /* Call Timer.callOnTimer() method */
-                    func_onTimer = app_manager_lookup_function(
-                        inst, "_on_timer_callback", "(i32)");
+                    func_onTimer =
+                        app_manager_lookup_function(inst, "_on_timer_callback");
 
                     if (!func_onTimer) {
                         app_manager_printf(
@@ -467,7 +469,7 @@ wasm_app_routine(void *arg)
 #endif
 
     /* Call app's onInit() method */
-    func_onInit = app_manager_lookup_function(inst, "_on_init", "()");
+    func_onInit = app_manager_lookup_function(inst, "_on_init");
     if (!func_onInit) {
         app_manager_printf("Cannot find function on_init().\n");
         goto fail1;
@@ -491,7 +493,7 @@ wasm_app_routine(void *arg)
 
 fail2:
     /* Call WASM app onDestroy() method if there is */
-    func_onDestroy = app_manager_lookup_function(inst, "_on_destroy", "()");
+    func_onDestroy = app_manager_lookup_function(inst, "_on_destroy");
     if (func_onDestroy) {
         if (!wasm_runtime_call_wasm(wasm_app_data->exec_env, func_onDestroy, 0,
                                     NULL)) {

@@ -40,7 +40,7 @@ display_flush(wasm_exec_env_t exec_env, int32_t x1, int32_t y1, int32_t x2,
     struct display_buffer_descriptor desc;
 
     if (!wasm_runtime_validate_native_addr(module_inst, color,
-                                           sizeof(lv_color_t)))
+                                           (uint64_t)sizeof(lv_color_t)))
         return;
 
     uint16_t w = x2 - x1 + 1;
@@ -72,7 +72,7 @@ display_input_read(wasm_exec_env_t exec_env, void *data)
     lv_indev_data_t *lv_data = (lv_indev_data_t *)data;
 
     if (!wasm_runtime_validate_native_addr(module_inst, lv_data,
-                                           sizeof(lv_indev_data_t)))
+                                           (uint64_t)sizeof(lv_indev_data_t)))
         return false;
 
     return touchscreen_read(lv_data);
@@ -90,7 +90,7 @@ display_vdb_write(wasm_exec_env_t exec_env, void *buf, lv_coord_t buf_w,
     uint8_t *buf_xy = (uint8_t *)buf + 3 * x + 3 * y * buf_w;
 
     if (!wasm_runtime_validate_native_addr(module_inst, color,
-                                           sizeof(lv_color_t)))
+                                           (uint64_t)sizeof(lv_color_t)))
         return;
 
     *buf_xy = color->red;

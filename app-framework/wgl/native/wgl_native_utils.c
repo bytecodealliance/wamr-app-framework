@@ -71,7 +71,7 @@ wgl_native_func_call(wasm_exec_env_t exec_env, WGLNativeFuncDef *funcs,
      * with pointer length equals to 1. Here validate the argv
      * buffer again but with its total length in bytes */
     if (!wasm_runtime_validate_native_addr(module_inst, argv,
-                                           argc * sizeof(uint32)))
+                                           (uint64)argc * sizeof(uint32)))
         return;
 
     while (func_def < func_def_end) {

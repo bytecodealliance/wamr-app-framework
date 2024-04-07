@@ -162,7 +162,7 @@ display_flush(wasm_exec_env_t exec_env, int32_t x1, int32_t y1, int32_t x2,
     wasm_module_inst_t module_inst = get_module_inst(exec_env);
 
     if (!wasm_runtime_validate_native_addr(module_inst, color,
-                                           sizeof(lv_color_t)))
+                                           (uint64_t)sizeof(lv_color_t)))
         return;
 
     monitor_flush(x1, y1, x2, y2, color);
@@ -195,8 +195,8 @@ display_input_read(wasm_exec_env_t exec_env, void *input_data_app)
     display_input_data *data_app = (display_input_data *)input_data_app;
     bool ret;
 
-    if (!wasm_runtime_validate_native_addr(module_inst, data_app,
-                                           sizeof(display_input_data)))
+    if (!wasm_runtime_validate_native_addr(
+            module_inst, data_app, (uint64_t)sizeof(display_input_data)))
         return false;
 
     lv_indev_data_t data = { 0 };
@@ -205,7 +205,7 @@ display_input_read(wasm_exec_env_t exec_env, void *input_data_app)
 
     data_app->point = data.point;
     data_app->user_data_offset =
-        wasm_runtime_addr_native_to_app(module_inst, data.user_data);
+        (uint32)wasm_runtime_addr_native_to_app(module_inst, data.user_data);
     data_app->state = data.state;
 
     return ret;
@@ -223,7 +223,7 @@ display_vdb_write(wasm_exec_env_t exec_env, void *buf, lv_coord_t buf_w,
     unsigned char *buf_xy = (unsigned char *)buf + 4 * x + 4 * y * buf_w;
 
     if (!wasm_runtime_validate_native_addr(module_inst, color,
-                                           sizeof(lv_color_t)))
+                                           (uint64_t)sizeof(lv_color_t)))
         return;
 
     *(lv_color_t *)buf_xy = *color;
