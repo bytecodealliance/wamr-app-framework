@@ -158,7 +158,7 @@ am_register_resource(const char *url,
         r = r->next;
     }
 
-    if (strlen(url) > RESOUCE_EVENT_URL_LEN_MAX)
+    if (strlen(url) > RESOURCE_EVENT_URL_LEN_MAX)
         return false;
 
     if (register_num >= RESOURCE_REGISTRATION_NUM_MAX)
