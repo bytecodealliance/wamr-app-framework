@@ -13,6 +13,10 @@
 extern "C" {
 #endif
 
+#ifndef MAX_CONNECTION_PER_APP
+#define MAX_CONNECTION_PER_APP 3
+#endif
+
 /**
  * This file defines connection library which should be implemented by
  * different platforms

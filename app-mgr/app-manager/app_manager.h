@@ -15,6 +15,36 @@
 extern "C" {
 #endif
 
+/* Max app number of all modules */
+#ifndef MAX_APP_INSTALLATIONS
+#define MAX_APP_INSTALLATIONS 3
+#endif
+
+/* Default timer number in one app */
+#ifndef DEFAULT_TIMERS_PER_APP
+#define DEFAULT_TIMERS_PER_APP 20
+#endif
+
+/* Max timer number in one app */
+#ifndef MAX_TIMERS_PER_APP
+#define MAX_TIMERS_PER_APP 30
+#endif
+
+/* Max resource registration number in one app */
+#ifndef RESOURCE_REGISTRATION_NUM_MAX
+#define RESOURCE_REGISTRATION_NUM_MAX 16
+#endif
+
+/* Max length of resource/event url */
+#ifndef RESOURCE_EVENT_URL_LEN_MAX
+#define RESOURCE_EVENT_URL_LEN_MAX 256
+#endif
+
+/* Default watchdog interval in ms */
+#ifndef DEFAULT_WATCHDOG_INTERVAL
+#define DEFAULT_WATCHDOG_INTERVAL (3 * 60 * 1000)
+#endif
+
 #define APP_MGR_MALLOC wasm_runtime_malloc
 #define APP_MGR_FREE wasm_runtime_free
 
